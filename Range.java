@@ -2,24 +2,39 @@ import java.util.NoSuchElementException;
 public class Range implements IntegerSequence{
   private int start,end,current;
   public Range(int start,  int end){
-      start = this.start;
-      end = this.end;
+    if(start > end){
+      throw new IllegalArgumentException("cant do that");
+    }
+      this.start = start;
+      this.end = end;
+      current = start;
     }
   public void reset(){
-      current = 10;
+      current = start;
     }
   public int length(){
-      return end + 1 - start ;
+      return end-start + 1 ;
     }
   public boolean hasNext(){
-    if(current == end){
-        throw new NoSuchElementException("There is no number above " + current + ".");\
-        return false;
-    }return true;
+    return current <= end;
   //@throws NoSuchElementException
   }
   public int next(){ 
+    if(! hasNext()){
+      throw new NoSuchElementException("There is no number above " + current + ".");
+    }
       current++;
       return current -1;
+     }
+
+     public static void main(String[] args) {
+      IntegerSequence r = new Range(10,15);
+      while(r.hasNext()){
+        System.out.print(r.next());
+        if( r.hasNext() ){       
+           System.out.print( ", " );
+        }
+      }
+      System.out.println();
      }
 }
