@@ -9,10 +9,13 @@ public class Range implements IntegerSequence{
       current = 10;
     }
   public int length(){
-      return end - start;
+      return end + 1 - start ;
     }
   public boolean hasNext(){
-    
+    if(current == end){
+        throw new NoSuchElementException("There is no number above " + current + ".");\
+        return false;
+    }return true;
   //@throws NoSuchElementException
   }
   public int next(){ 
