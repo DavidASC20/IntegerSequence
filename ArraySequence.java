@@ -18,13 +18,25 @@ public class ArraySequence implements IntegerSequence{
 
     public boolean hasNext(){
         if(currentIndex >= data.length - 1){
-            throw new NoSuchElementException("There are no more integers stored after " + data[currentIndex]);
-            return false;
+          return false;
         }return true;
     }
 
     public int next(){
+        if(! hasNext()){
+            throw new NoSuchElementException("There are no more integers stored after " + data[currentIndex]);
+        }
         currentIndex ++;
         return data[currentIndex - 1];
+    }
+
+    public ArraySequence(IntegerSequence otherseq){
+        int[] other = new int[otherseq.length()];
+        int i = 0;
+        while(otherseq.hasNext()){
+            other[i] = otherseq.next();
+            i++;
+        }
+        other = data;
     }
 }
