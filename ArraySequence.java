@@ -5,7 +5,10 @@ public class ArraySequence implements IntegerSequence{
 
   /*Construct the sequence by copying values from the other array into the data array*/
   public ArraySequence(int [] other){
-      other = data;
+      data = new int[other.length];
+      for(int i = 0; i < other.length; i++){
+      data[i] = other[i];
+      }
       currentIndex = 0;
     }
 
@@ -23,22 +26,20 @@ public class ArraySequence implements IntegerSequence{
 
     public int next(){
         if(! hasNext()){
-            throw new NoSuchElementException("There are no more integers stored after " + data[currentIndex]);
-        }else{
-            currentIndex ++;
+            throw new NoSuchElementException("You cannot travel further through this IntegerSequence");
+        }else{currentIndex ++;
             return data[currentIndex - 1];
         }
-       
     }
 
     public ArraySequence(IntegerSequence otherseq){
+        otherseq.reset();
         int[] other = new int[otherseq.length()];
-        int i = 0;
-        while(otherseq.hasNext()){
+        for(int i = 0; i < otherseq.length(); i++){
             other[i] = otherseq.next();
-            i++;
         }
         other = data;
+        otherseq.reset();
     }
 
     public static void main(String[] args) {
