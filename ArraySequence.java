@@ -34,11 +34,10 @@ public class ArraySequence implements IntegerSequence{
 
     public ArraySequence(IntegerSequence otherseq){
         otherseq.reset();
-        int[] other = new int[otherseq.length()];
+        data = new int [otherseq.length()];
         for(int i = 0; i < otherseq.length(); i++){
-            other[i] = otherseq.next();
+            data[i] = otherseq.next();
         }
-        other = data;
         otherseq.reset();
     }
 
